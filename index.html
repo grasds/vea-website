@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>༝ ִ ࣪₊ ⊹ ⌞vea ⌝</title>
     <style>
-        /* Background Hitam Pekat dengan Glow Putih di Dasar Halaman */
+        /* Background Hitam dengan Glow Putih di Dasar Halaman */
         body {
             margin: 0;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: radial-gradient(circle at bottom, #ffffff -90%, #000000 85%);
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at bottom, #ffffff -100%, #000000 90%);
             background-attachment: fixed;
             color: #ffffff;
             min-height: 100vh;
             scroll-behavior: smooth;
         }
 
-        /* Navigasi Modern */
+        /* Navigasi */
         header {
             display: flex;
             justify-content: space-between;
@@ -25,169 +25,89 @@
             position: fixed;
             top: 0; width: 100%; box-sizing: border-box;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
         }
 
-        .brand {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
+        .brand { font-size: 18px; font-weight: bold; }
         .nav-links a {
-            color: #a0a0a0;
+            color: #888;
             text-decoration: none;
             margin-left: 30px;
             font-size: 15px;
             transition: 0.3s;
         }
-
-        .nav-links a:hover { color: #ffffff; }
-
-        /* Efek Bold saat ditekan */
-        .nav-links a:focus, .nav-links a:active {
+        .nav-links a:hover, .nav-links a:focus {
             font-weight: 800;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            outline: none;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
-        /* HOME - Foto Server & Nama Estetik */
-        .hero-section {
+        /* Home Section */
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
         }
-
-        .server-logo {
+        .server-img {
             width: 180px;
             height: 180px;
             border-radius: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+            box-shadow: 0 0 40px rgba(255,255,255,0.1);
             object-fit: cover;
         }
+        .hero h1 { font-size: clamp(30px, 8vw, 70px); margin: 0; }
 
-        .hero-title {
-            font-size: clamp(35px, 8vw, 80px);
-            font-weight: 800;
-            margin: 0;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-        }
-
-        /* FOUNDERS - Posisi Terkoreksi */
-        .founders-section {
+        /* Founders Section */
+        .founders {
             padding: 100px 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .section-label {
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 50px;
-        }
-
-        .cards-wrapper {
-            display: flex;
-            gap: 30px;
-            max-width: 1000px;
-            width: 100%;
             justify-content: center;
+            gap: 30px;
             flex-wrap: wrap;
         }
-
-        .profile-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
             padding: 40px;
-            flex: 1;
-            min-width: 300px;
-            border-radius: 24px;
-            transition: transform 0.3s ease;
+            border-radius: 25px;
+            width: 320px;
+            text-align: center;
         }
+        .card img { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px; border: 2px solid #333; }
+        .role { font-size: 12px; color: #5865F2; font-weight: bold; text-transform: uppercase; margin-top: 10px; display: block; }
 
-        .profile-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.04);
+        /* About Section */
+        .about {
+            padding: 120px 10%;
+            max-width: 800px;
         }
-
-        .profile-card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .display-name {
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-
-        .role-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            margin: 15px 0;
-            text-transform: uppercase;
-        }
-
-        /* ABOUT - Menyatu dengan Tema Hitam */
-        .about-section {
-            padding: 150px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .about-text-content { flex: 1; min-width: 300px; }
-        
-        .about-info-list { list-style: none; padding: 0; margin: 40px 0; }
-        .about-info-list li { 
-            margin-bottom: 15px; 
+        .about h2 { font-size: 50px; margin-bottom: 30px; }
+        .info-list { list-style: none; padding: 0; margin-bottom: 40px; }
+        .info-list li { 
             font-size: 18px; 
-            color: #888;
-            display: flex;
-            align-items: center;
+            margin-bottom: 15px; 
+            display: flex; 
+            align-items: center; 
+            color: #ccc;
         }
-        
-        .about-info-list li::before {
+        /* Poin Titik Kotak Putih */
+        .info-list li::before {
             content: "▢";
-            margin-right: 15px;
             color: #fff;
+            margin-right: 15px;
             font-size: 14px;
         }
+        .info-list b { color: #fff; margin-right: 8px; }
+        
+        .description { font-size: 18px; line-height: 1.8; color: #aaa; }
+        .footer-note { font-weight: bold; color: #fff; margin-top: 20px; display: block; }
 
-        .about-info-list b { color: #fff; margin-right: 10px; }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 80px 20px 40px;
-            font-size: 13px;
-            color: #333;
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 20px; }
-            .about-section { text-align: center; }
-            .about-info-list li { justify-content: center; }
-        }
+        footer { text-align: center; padding: 60px; color: #333; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -201,47 +121,39 @@
         </nav>
     </header>
 
-    <section class="hero-section" id="home">
-        <img src="server.png.png" alt="Vea Server Logo" class="server-logo">
-        <h1 class="hero-title">༝ ִ ࣪₊ ⊹ ⌞vea ⌝</h1>
+    <section class="hero" id="home">
+        <img src="server.png.png" alt="Server Logo" class="server-img">
+        <h1>༝ ִ ࣪₊ ⊹ ⌞vea ⌝</h1>
     </section>
 
-    <section class="founders-section" id="founders">
-        <div class="section-label">Our Leadership</div>
-        <div class="cards-wrapper">
-            <div class="profile-card">
-                <img src="valenxias.jpg.jpg" alt="Valenxias">
-                <h2 class="display-name">valenxias</h2>
-                <div class="role-badge" style="color: #ff9999;">Founder</div>
-                <p style="color: #666; font-size: 15px; line-height: 1.6;">Pembangun utama dan visi di balik komunitas Vea.</p>
-            </div>
-
-            <div class="profile-card">
-                <img src="graigpad.jpg.jpg" alt="Graigpad">
-                <h2 class="display-name">graigpad</h2>
-                <div class="role-badge" style="color: #99ccff;">Co-Founder</div>
-                <p style="color: #666; font-size: 15px; line-height: 1.6;">Pengembang teknis dan pendukung pertumbuhan server Vea.</p>
-            </div>
+    <section class="founders" id="founders">
+        <div class="card">
+            <img src="valenxias.jpg.jpg" alt="Founder">
+            <h2 style="margin:0">valenxias</h2>
+            <span class="role">Founder</span>
+        </div>
+        <div class="card">
+            <img src="graigpad.jpg.jpg" alt="Co-Founder">
+            <h2 style="margin:0">graigpad</h2>
+            <span class="role">Co-Founder</span>
         </div>
     </section>
 
-    <section class="about-section" id="about">
-        <div class="about-text-content">
-            <h1 style="font-size: 60px; font-weight: 800; margin: 0;">About</h1>
-            <ul class="about-info-list">
-                <li><b>Created:</b> 11 April 2026</li>
-                <li><b>Focus:</b> Cozy Place & Chill Chat</li>
-                <li><b>Invite:</b> <a href="https://discord.gg/DhHJsXDVeh" target="_blank" style="color:#5865F2; text-decoration:none;">discord.gg/DhHJsXDVeh</a></li>
-            </ul>
-            <p style="color: #666; line-height: 1.8; font-size: 19px; max-width: 600px;">
-                Vea hadir sebagai ruang nyaman bagi mereka yang ingin beristirahat sejenak dan mengobrol ringan. Temukan teman baru dalam suasana yang damai dan hangat.
-            </p>
-        </div>
+    <section class="about" id="about">
+        <h2>About</h2>
+        <ul class="info-list">
+            <li><b>Created:</b> 11 April 2026</li>
+            <li><b>Focus:</b> Cozy Place & Chill Chat</li>
+            <li><b>Invite:</b> <a href="https://discord.gg/DhHJsXDVeh" style="color:#5865F2; text-decoration:none;">discord.gg/DhHJsXDVeh</a></li>
+        </ul>
+        
+        <p class="description">
+            In need of a place to just rest and have a light chat? Vea is here as a cozy space for those who want to share stories or simply find new friends in a warm and peaceful atmosphere.
+            <span class="footer-note">Just be yourself and find your comfort here. Our doors are always open for you!</span>
+        </p>
     </section>
 
-    <footer>
-        &copy; 2026 ༝ ִ ࣪₊ ⊹ ⌞vea ⌝ — All Rights Reserved.
-    </footer>
+    <footer>&copy; 2026 ༝ ִ ࣪₊ ⊹ ⌞vea ⌝</footer>
 
 </body>
 </html>
