@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>༝ ִ ࣪₊ ⊹ ⌞vea ⌝</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f1113;
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(15, 17, 19, 0.95);
+            position: fixed;
+            top: 0; width: 100%; box-sizing: border-box;
+            z-index: 1000;
+            border-bottom: 1px solid #2b2d31;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .nav-links a {
+            color: #b9bbbe;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+            transition: 0.2s;
+            font-weight: 400;
+        }
+
+        .nav-links a:hover { color: white; }
+
+        /* Efek Bold saat ditekan/aktif */
+        .nav-links a:focus, .nav-links a:active {
+            font-weight: 800;
+            color: #5865F2;
+            outline: none;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .card {
+            background: #23272a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #5865F2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card img {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 3px solid #5865F2;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">༝ ִ ࣪₊ ⊹ ⌞vea ⌝</div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#content">Content</a>
+            <a href="#others">Others</a>
+            <a href="#founder">Founder</a>
+        </nav>
+    </header>
+
+    <div class="container" id="home">
+        <div id="founder" class="card">
+            <img src="https://via.placeholder.com/150" alt="Founder">
+            <h2>Graig Kusmunandar</h2>
+            <p>༝ ִ ࣪₊ ⊹ ⌞Founder of Vea Server⌝</p>
+        </div>
+    </div>
+
+</body>
+</html>
