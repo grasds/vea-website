@@ -5,73 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>༝ ִ ࣪₊ ⊹ ⌞vea ⌝</title>
     <style>
+        /* Gaya Dasar & Efek Glow Bawah */
         body {
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #0f1113;
-            color: white;
-            scroll-behavior: smooth;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at bottom, #ffffff -90%, #000000 70%);
+            background-attachment: fixed;
+            color: #ffffff;
+            min-height: 100vh;
+            scroll-behavior: smooth; /* Agar scroll antar menu terasa halus */
         }
 
+        /* Navigasi */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
-            background: rgba(15, 17, 19, 0.95);
+            padding: 30px 60px;
             position: fixed;
             top: 0; width: 100%; box-sizing: border-box;
             z-index: 1000;
-            border-bottom: 1px solid #2b2d31;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         .brand {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
             letter-spacing: 1px;
-            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         .nav-links a {
-            color: #b9bbbe;
+            color: #a0a0a0;
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 35px;
             font-size: 16px;
-            transition: 0.2s;
-            font-weight: 400;
+            transition: 0.3s;
         }
 
-        .nav-links a:hover { color: white; }
+        .nav-links a:hover { color: #ffffff; }
 
-        /* Efek Bold saat ditekan/aktif */
+        /* Efek Bold saat menu aktif/diklik */
         .nav-links a:focus, .nav-links a:active {
             font-weight: 800;
-            color: #5865F2;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
             outline: none;
         }
 
-        .container {
+        /* Bagian Utama (Team Vea) */
+        .main-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             flex-direction: column;
+            align-items: center;
+            padding: 150px 20px 100px;
         }
 
-        .card {
-            background: #23272a;
-            padding: 40px;
-            border-radius: 20px;
+        .team-title {
+            font-size: clamp(50px, 8vw, 80px); /* Ukuran dinamis */
+            font-weight: 800;
+            margin-bottom: 50px;
             text-align: center;
-            border: 1px solid #5865F2;
+        }
+
+        .cards-wrapper {
+            display: flex;
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+            flex-wrap: wrap; /* Agar rapi di HP */
+            justify-content: center;
+        }
+
+        /* Kartu Profil Style */
+        .profile-card {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            text-align: left;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .card img {
-            width: 120px; height: 120px;
+        .profile-card img {
+            width: 100px; height: 100px;
             border-radius: 50%;
-            border: 3px solid #5865F2;
-            margin-bottom: 15px;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tag-name {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .display-name {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        }
+
+        .role-text {
+            color: #5865F2;
+            font-size: 14px;
+            margin: 10px 0 20px;
+            font-weight: 600;
+        }
+
+        .bio-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        /* Section About (Latar Krem) */
+        .about-section {
+            background-color: #f5f2e9; 
+            color: #2b2826;
+            padding: 100px 10%;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-content { flex: 1; min-width: 300px; }
+        .about-title { font-size: 60px; font-weight: 800; margin-bottom: 30px; }
+        
+        .about-info { list-style: none; padding: 0; margin-bottom: 30px; }
+        .about-info li { 
+            font-size: 18px; 
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+        }
+        .about-info li::before {
+            content: ". ▢ .";
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .about-image { flex: 1; display: flex; justify-content: center; }
+        .about-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 15px;
+            filter: grayscale(1);
+            box-shadow: 20px 20px 0px #2b2826;
+        }
+
+        /* Footer Simple */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 12px;
+            color: #555;
+            background: #000;
+        }
+
+        /* Responsive HP */
+        @media (max-width: 768px) {
+            header { padding: 20px; }
+            .about-section { text-align: center; flex-direction: column-reverse; }
         }
     </style>
 </head>
@@ -81,20 +188,57 @@
         <div class="brand">༝ ִ ࣪₊ ⊹ ⌞vea ⌝</div>
         <nav class="nav-links">
             <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#content">Content</a>
-            <a href="#others">Others</a>
             <a href="#founder">Founder</a>
+            <a href="#about">About</a>
         </nav>
     </header>
 
-    <div class="container" id="home">
-        <div id="founder" class="card">
-            <img src="https://via.placeholder.com/150" alt="Founder">
-            <h2>Graig Kusmunandar</h2>
-            <p>༝ ִ ࣪₊ ⊹ ⌞Founder of Vea Server⌝</p>
+    <div class="main-container" id="home">
+        <h1 class="team-title">Vea Team</h1>
+        
+        <div class="cards-wrapper" id="founder">
+            <div class="profile-card">
+                <img src="https://i.ibb.co/Xkz9vK4/thumbs-up.jpg" alt="Graigpad">
+                <div class="tag-name">Founder</div>
+                <h2 class="display-name">graigpad</h2>
+                <div class="role-text">Owner & Developer</div>
+                <div class="bio-box">Fokus pada pengembangan sistem dan manajemen utama server Vea.</div>
+            </div>
+
+            <div class="profile-card">
+                <img src="https://i.ibb.co/mS79XzV/valenxias.jpg" alt="Valenxias">
+                <div class="tag-name">Co-Founder</div>
+                <h2 class="display-name">valenxias</h2>
+                <div class="role-text">Community Manager</div>
+                <div class="bio-box">Mengelola interaksi komunitas dan memastikan semua berjalan lancar.</div>
+            </div>
         </div>
     </div>
+
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h1 class="about-title">About</h1>
+            <ul class="about-info">
+                <li>Created: 11 April 2026</li>
+                <li>Focus: Cozy Place & Chill Chat</li>
+                <li>Invite: <a href="https://discord.gg/DhHJsXDVeh" target="_blank" style="color:#2b2826;">discord.gg/DhHJsXDVeh</a></li>
+            </ul>
+            <p style="font-size: 18px; line-height: 1.6;">
+                In need of a place to just rest and have a light chat? Vea is here as a cozy space for those who want to share stories or simply find new friends in a warm and peaceful atmosphere.
+            </p>
+            <p style="font-weight: bold; font-size: 18px;">
+                Just be yourself and find your comfort here.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img src="https://i.ibb.co/6Ym6XqB/server-logo.png" alt="Logo Server">
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Vea Server. All rights reserved.
+    </footer>
 
 </body>
 </html>
