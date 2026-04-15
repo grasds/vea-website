@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>༝ ִ ࣪₊ ⊹ ⌞vea ⌝</title>
     <style>
-        /* Background Hitam dengan Glow Putih di Dasar Halaman (Tetap Menyatu) */
+        /* Background Hitam dengan Glow Putih di Dasar Halaman */
         body {
             margin: 0;
             font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -16,7 +16,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Navigasi Modern (Efek Bold Tetap) */
+        /* Navigasi */
         header {
             display: flex;
             justify-content: space-between;
@@ -32,7 +32,6 @@
         .brand {
             font-size: 18px;
             font-weight: bold;
-            letter-spacing: 1px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
@@ -46,7 +45,7 @@
 
         .nav-links a:hover { color: #ffffff; }
 
-        /* Efek Bold saat menu aktif/diklik */
+        /* Efek Bold Menu Aktif */
         .nav-links a:focus, .nav-links a:active {
             font-weight: 800;
             color: #ffffff;
@@ -54,7 +53,7 @@
             outline: none;
         }
 
-        /* HOME - Logo Diperbesar & Tulisan Fixed */
+        /* HOME - Logo 250px & Nama Tetap */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -66,22 +65,22 @@
         }
 
         .server-logo {
-            width: 250px; /* Ukuran Jauh Lebih Besar */
+            width: 250px; 
             height: 250px;
-            border-radius: 40px; /* Bentuk kotak membulat */
+            border-radius: 40px;
             margin-bottom: 30px;
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
             object-fit: cover;
         }
 
         .hero-title {
-            font-size: clamp(35px, 8vw, 80px); /* Ukuran tulisan fixed */
+            font-size: clamp(35px, 8vw, 80px);
             font-weight: 800;
             margin: 0;
             text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
         }
 
-        /* FOUNDERS - Posisi Terkoreksi */
+        /* FOUNDERS - Valenxias (Founder) & Graigpad (Co-Founder) */
         .founders-section {
             padding: 100px 20px;
             display: flex;
@@ -116,10 +115,7 @@
             transition: transform 0.3s ease;
         }
 
-        .profile-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.04);
-        }
+        .profile-card:hover { transform: translateY(-10px); }
 
         .profile-card img {
             width: 100px;
@@ -134,7 +130,6 @@
             font-size: 32px;
             font-weight: 800;
             margin: 0;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
         .role-badge {
@@ -148,35 +143,36 @@
             text-transform: uppercase;
         }
 
-        /* ABOUT - Menyatu dengan Tema Hitam */
+        /* ABOUT - Teks Bahasa Inggris Baru */
         .about-section {
             padding: 150px 10%;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 60px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .about-text-content { max-width: 800px; }
+        
+        .about-info-list { 
+            list-style: none; 
+            padding: 0; 
+            margin: 40px 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px;
             flex-wrap: wrap;
         }
 
-        .about-text-content { flex: 1; min-width: 300px; }
-        
-        .about-info-list { list-style: none; padding: 0; margin: 40px 0; }
-        .about-info-list li { 
-            margin-bottom: 15px; 
-            font-size: 18px; 
-            color: #888;
-            display: flex;
-            align-items: center;
-        }
-        
-        .about-info-list li::before {
-            content: "▢";
-            margin-right: 15px;
-            color: #fff;
-            font-size: 14px;
-        }
+        .about-info-list li { font-size: 18px; color: #888; }
+        .about-info-list b { color: #fff; margin-right: 5px; }
 
-        .about-info-list b { color: #fff; margin-right: 10px; }
+        .desc-text {
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
 
         /* Footer */
         footer {
@@ -187,9 +183,7 @@
         }
 
         @media (max-width: 768px) {
-            header { padding: 20px; }
-            .about-section { text-align: center; }
-            .about-info-list li { justify-content: center; }
+            .nav-links { display: none; }
             .server-logo { width: 180px; height: 180px; }
         }
     </style>
@@ -217,29 +211,34 @@
                 <img src="valenxias.jpg.jpg" alt="Valenxias">
                 <h2 class="display-name">valenxias</h2>
                 <div class="role-badge" style="color: #ff9999;">Founder</div>
-                <p style="color: #666; font-size: 15px; line-height: 1.6;">Owner</p>
+                <p style="color: #666;">Owner</p>
             </div>
 
             <div class="profile-card">
                 <img src="graigpad.jpg.jpg" alt="Graigpad">
                 <h2 class="display-name">graigpad</h2>
                 <div class="role-badge" style="color: #99ccff;">Co-Founder</div>
-                <p style="color: #666; font-size: 15px; line-height: 1.6;">Co-Owner & Dev</p>
+                <p style="color: #666;">Co-Owner & Dev</p>
             </div>
         </div>
     </section>
 
     <section class="about-section" id="about">
         <div class="about-text-content">
-            <h1 style="font-size: 60px; font-weight: 800; margin: 0;">About</h1>
+            <h1 style="font-size: 60px; font-weight: 800; margin-bottom: 20px;">About</h1>
+            
+            <p class="desc-text">
+                In need of a place to just rest and have a light chat? Vea is here as a cozy space for those who want to share stories or simply find new friends in a warm and peaceful atmosphere.
+            </p>
+            <p class="desc-text" style="font-weight: 600; color: #fff;">
+                Just be yourself and find your comfort here. Our doors are always open for you!
+            </p>
+
             <ul class="about-info-list">
                 <li><b>Created:</b> 11 April 2026</li>
                 <li><b>Focus:</b> Cozy Place & Chill Chat</li>
                 <li><b>Invite:</b> <a href="https://discord.gg/DhHJsXDVeh" target="_blank" style="color:#5865F2; text-decoration:none;">discord.gg/DhHJsXDVeh</a></li>
             </ul>
-            <p style="color: #666; line-height: 1.8; font-size: 19px; max-width: 600px;">
-                Vea hadir sebagai ruang nyaman bagi mereka yang ingin beristirahat sejenak dan mengobrol ringan. Temukan teman baru dalam suasana yang damai dan hangat.
-            </p>
         </div>
     </section>
 
