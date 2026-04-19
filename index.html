@@ -1,278 +1,225 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𑣲 — 𝐯𝐞𝐚</title>
-    <link rel="icon" type="image/jpeg" href="server_baru.jpg">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: radial-gradient(circle at bottom, #ffffff -90%, #000000 70%);
-            background-attachment: fixed;
-            color: #ffffff;
-            min-height: 100vh;
-            scroll-behavior: smooth;
+const http = require('http');
+const { 
+    Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, 
+    ButtonStyle, PermissionFlagsBits, ChannelType, ActivityType, 
+    ModalBuilder, TextInputBuilder, TextInputStyle 
+} = require('discord.js');
+const config = require('./config.json');
+
+// SERVER UNTUK RENDER (KEEP ALIVE)
+if (!global.botInitialized) {
+    const server = http.createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end("Bot Online");
+    });
+    server.listen(process.env.PORT || 8080);
+    global.botInitialized = true;
+}
+
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds, 
+        GatewayIntentBits.GuildMembers, 
+        GatewayIntentBits.GuildMessages, 
+        GatewayIntentBits.MessageContent
+    ]
+});
+
+// KONFIGURASI & ASSET (DIPERTAHANKAN 100%)
+const allowedUsers = [
+    '1033073746598166660', 
+    '1453068775283757327', 
+    '1495299275037478983', 
+    '1490003787451072683'
+]; 
+
+const boostChannelId = '1492338470927077378'; 
+const welcomeGIF = 'https://images-ext-1.discordapp.net/external/PWBlYspGb2dWKgCWMM1sDN_eqMH4wXMN9z1a-2Eriew/https/media.tenor.com/iBMaQmk7tWUAAAAC/zxc-sosal.gif'; 
+const rezeGIF = 'https://media.tenor.com/bjT1TgKXvAMAAAAC/reze-chainsaw-man.gif'; 
+const gifBatas = 'https://media.discordapp.net/attachments/1271761077914308670/1278504003239547022/FD969544-C804-4336-A55C-565841C4B71B.gif';
+const boostGIF = 'https://i.pinimg.com/originals/77/10/88/7710887ef7267bd7c3f7395e705488e6.gif'; 
+const pembatasTeks = '═══════════ ˗ˏˋ ★ ˎˊ˗ ═══════════';
+
+// DEFINISI GLOBAL UNTUK PENYEGARAN VISUAL
+// Teks yang akan digunakan pada tombol (juga digunakan sebagai referensi).
+const hiasanBtnLabel = '𑣲 — 𝐯𝐞𝐚'; 
+
+// TAMBAHAN: Tombol Hiasan Nonaktif (Disabled) dengan Ikon Emoji (Disabled)
+const hiasanBtnRow = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+        .setCustomId('btn_hiasan')
+        .setLabel(hiasanBtnLabel) // Menggunakan teks dekoratif tebal
+        .setEmoji('❖') // Tambahan Ikon Emoji dekoratif tebal (Logo visual)
+        .setStyle(ButtonStyle.Secondary)
+        .setDisabled(true) // Ini membuat tombolnya mati (hanya hiasan)
+);
+
+client.once('ready', () => {
+    console.log(`✅ Bot Online: ${client.user.tag}`);
+    client.user.setPresence({
+        activities: [{ name: "Custom Status", type: ActivityType.Custom, state: "Follow us on bio! 🔗" }],
+        status: 'idle',
+    });
+});
+
+// --- FUNGSI WELCOME ---
+async function sendWelcome(member, channel) {
+    const wEmbed = new EmbedBuilder()
+        .setColor(0x2b2d31)
+        .setTitle('𝐀 𝐍𝐞𝐰 𝐌𝐞𝐦𝐛𝐞𝐫 𝐇𝐚𝐬 𝐀𝐫𝐫𝐢𝐯𝐞𝐝!')
+        .setDescription(`${pembatasTeks}\n\nWelcome to the family, ${member}\n\nWe are a community focused on growth and collaboration. To get started, follow ini:\n\n. ❐ . Read the Rules: Ensure you follow our SFW policy.\n. ❐ . Explore: Visit our channels and meet the members.\n\nIf you have any questions, feel free to open a ticket in <#1492369335984062646>\n\n${pembatasTeks}`)
+        .setImage(welcomeGIF)
+        .setFooter({ text: '\u200B' }); // Trik spasi transparan untuk memunculkan garis separator asli Discord tanpa teks
+    
+    // Mengirim embed sekaligus menambahkan tombol hiasan global di bawahnya
+    await channel.send({ embeds: [wEmbed], components: [hiasanBtnRow] });
+}
+
+// --- FUNGSI BOOST ---
+async function sendBoost(member, guild) {
+    const bChannel = guild.channels.cache.get(boostChannelId);
+    if (!bChannel) return;
+    const bEmbed = new EmbedBuilder()
+        .setColor(0xf47fff)
+        .setTitle('𝐒𝐞𝐫𝐯𝐞𝐫 𝐁𝐨𝐨𝐬𝐭𝐞𝐝!')
+        .setDescription(`<a:httpsdiscordggBkcTSnUaXG:1492709168635707522>  **Thank you for supporting us!**\n\nThank you so much to ${member} who has supported this server. We truly appreciate all your help.\n\nEnjoy your new perks! 🕊️`)
+        .setImage(boostGIF)
+        .setFooter({ text: '\u200B' }); // Garis transparan asli Discord
+    
+    // Mengirim embed sekaligus menambahkan tombol hiasan global
+    await bChannel.send({ embeds: [bEmbed], components: [hiasanBtnRow] });
+}
+
+// --- EVENTS ---
+client.on('guildMemberAdd', (member) => {
+    const channel = member.guild.channels.cache.get(config.welcomeChannel);
+    if (channel) sendWelcome(member, channel);
+});
+
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+    if (!oldMember.premiumSince && newMember.premiumSince) {
+        sendBoost(newMember, newMember.guild);
+    }
+});
+
+// --- COMMANDS ---
+client.on('messageCreate', async (msg) => {
+    if (msg.author.bot) return;
+    if (!allowedUsers.includes(msg.author.id)) return;
+
+    if (msg.content.toLowerCase() === 'batas') {
+        await msg.channel.send(gifBatas);
+        return msg.delete().catch(() => {});
+    }
+
+    if (msg.content.toLowerCase() === 'welcome') {
+        await msg.channel.send(rezeGIF);
+        return msg.delete().catch(() => {});
+    }
+
+    const args = msg.content.split(' ');
+    const cmd = args[0].toLowerCase();
+    const target = msg.mentions.members.first();
+
+    if (cmd === '!ticket') {
+        const tEmbed = new EmbedBuilder()
+            .setColor(0x2b2d31)
+            .setDescription(`# ༝ ִ ࣪₊ ⊹ ⌞𝐓𝐢𝐜𝐤𝐞𝐭 ⌝\n\n${pembatasTeks}\n\n> Klik tombol di bawah untuk membuat ticket.\n\n${pembatasTeks}`)
+            .setFooter({ text: '\u200B' }); // Garis transparan asli Discord
+        
+        // Mengirimkan Row Ticket aktif AND Row Hiasan global (Disabled) secara terpisah agar bersih.
+        const tRow = new ActionRowBuilder().addComponents(
+            new ButtonBuilder().setCustomId('ticket_btn').setLabel('✉︎').setStyle(ButtonStyle.Secondary)
+        );
+        // Mengirim 2 ActionRows (Row aktif dan Row hiasan global)
+        msg.channel.send({ embeds: [tEmbed], components: [tRow, hiasanBtnRow] });
+        return msg.delete().catch(() => {});
+    }
+
+    if (cmd === '!boost') { sendBoost(msg.member, msg.guild); return msg.delete().catch(() => {}); }
+    if (cmd === '!welcome') { sendWelcome(msg.member, msg.channel); return msg.delete().catch(() => {}); }
+
+    if (cmd === '!warn' && target) {
+        msg.channel.send(`⚠️ **${target.user.tag}** diperingatkan: ${args.slice(2).join(' ') || "No reason"}`);
+    }
+    if (cmd === '!ban' && target && msg.member.permissions.has(PermissionFlagsBits.BanMembers)) {
+        await target.ban(); msg.channel.send(`🚫 **${target.user.tag}** di-ban.`);
+    }
+    if (cmd === '!timeout' && target) {
+        const time = parseInt(args[2]) * 60000;
+        if (!isNaN(time)) { await target.timeout(time); msg.channel.send(`⏳ **${target.user.tag}** timeout ${args[2]}m.`); }
+    }
+
+    if (cmd === '!embed') {
+        const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId('open_m').setLabel('Create Embed').setStyle(ButtonStyle.Primary));
+        msg.channel.send({ content: ' Klik tombol untuk buat embed:', components: [row] });
+        return msg.delete().catch(() => {});
+    }
+});
+
+// --- INTERACTIONS ---
+client.on('interactionCreate', async (i) => {
+    if (!allowedUsers.includes(i.user.id) && i.customId !== 'ticket_btn') {
+        if (i.isButton() || i.isModalSubmit()) return i.reply({ content: 'Kamu tidak memiliki izin.', ephemeral: true });
+        return;
+    }
+
+    // MODAL EMBED (TETAP SAMA 100%)
+    if (i.isButton() && i.customId === 'open_m') {
+        const modal = new ModalBuilder().setCustomId('embed_m').setTitle('Embed Maker');
+        modal.addComponents(
+            new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('c').setLabel("Content").setStyle(TextInputStyle.Paragraph).setRequired(false)),
+            new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('t').setLabel("Title").setStyle(TextInputStyle.Short).setRequired(false)),
+            new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('d').setLabel("Description").setStyle(TextInputStyle.Paragraph).setRequired(false)),
+            new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('i').setLabel("Image URL").setStyle(TextInputStyle.Short).setRequired(false)),
+            new ActionRowBuilder().addComponents(new TextInputBuilder().setCustomId('f').setLabel("Footer (Kosongkan untuk Garis Saja)").setStyle(TextInputStyle.Short).setRequired(false))
+        );
+        await i.showModal(modal);
+    }
+
+    if (i.isModalSubmit() && i.customId === 'embed_m') {
+        const desc = i.fields.getTextInputValue('d');
+        const title = i.fields.getTextInputValue('t');
+        const img = i.fields.getTextInputValue('i');
+        const footer = i.fields.getTextInputValue('f');
+        const content = i.fields.getTextInputValue('c');
+
+        if (!desc && !title && !img && !footer) {
+            await i.reply({ content: 'Sent!', ephemeral: true });
+            return i.channel.send({ content: content || "Pesan Kosong" });
         }
 
-        /* Perbaikan: Menambahkan margin scroll agar navigasi tidak bablas */
-        section {
-            scroll-margin-top: 100px; 
+        const embed = new EmbedBuilder().setColor(0x2b2d31);
+        if (desc) embed.setDescription(desc);
+        if (title) embed.setTitle(title);
+        if (img && img.startsWith('http')) embed.setImage(img);
+        
+        // Logika Trik Garis Saja: Jika input footer diisi, gunakan teksnya. Jika kosong, kirim spasi transparan (\u200B) untuk memunculkan garis tanpa teks.
+        if (footer) {
+            embed.setFooter({ text: footer });
+        } else {
+            embed.setFooter({ text: '\u200B' }); 
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 60px;
-            position: fixed;
-            top: 0; width: 100%; box-sizing: border-box;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-        }
+        await i.reply({ content: 'Sent!', ephemeral: true });
+        
+        // Mengirim embed Maker dengan tombol hiasan terpasang otomatis di bawahnya
+        await i.channel.send({ content: content || null, embeds: [embed], components: [hiasanBtnRow] });
+    }
 
-        .brand {
-            font-size: 18px;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
+    if (i.isButton() && i.customId === 'ticket_btn') {
+        const ch = await i.guild.channels.create({
+            name: `ticket-${i.user.username}`, 
+            type: ChannelType.GuildText, 
+            parent: config.ticketCategory,
+            permissionOverwrites: [
+                { id: i.guild.id, deny: [PermissionFlagsBits.ViewChannel] },
+                { id: i.user.id, allow: [PermissionFlagsBits.ViewChannel, PermissionFlagsBits.SendMessages] }
+            ]
+        });
+        await ch.send(`Halo ${i.user}, ada yang bisa dibantu?`);
+        await i.reply({ content: `Ticket berhasil dibuat: ${ch}`, ephemeral: true });
+    }
+});
 
-        .nav-links a {
-            color: #a0a0a0;
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 15px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover { color: #ffffff; }
-
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .server-logo {
-            width: 250px; 
-            height: 250px;
-            border-radius: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
-            object-fit: cover;
-        }
-
-        .hero-title {
-            font-size: clamp(35px, 8vw, 80px);
-            font-weight: 800;
-            margin: 0;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-        }
-
-        .section-wrapper {
-            padding: 80px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .section-label {
-            font-size: clamp(40px, 8vw, 70px);
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 50px;
-            text-align: center;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .cards-wrapper {
-            display: flex;
-            gap: 30px;
-            max-width: 1000px;
-            width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .profile-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 40px;
-            flex: 1;
-            min-width: 250px;
-            border-radius: 24px;
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-
-        .profile-card:hover { transform: translateY(-10px); }
-
-        .profile-card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            object-fit: cover;
-        }
-
-        .card-link { text-decoration: none; color: inherit; }
-
-        .display-name {
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0;
-        }
-
-        .username-tag {
-            font-size: 16px;
-            color: #888888;
-            margin-top: 5px;
-            font-weight: 500;
-        }
-
-        .role-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            margin: 15px 0;
-            text-transform: uppercase;
-        }
-
-        .about-section {
-            padding: 100px 10%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            scroll-margin-top: 120px; /* Tambahan khusus untuk about agar pas */
-        }
-
-        .about-title {
-            font-size: clamp(40px, 8vw, 70px);
-            font-weight: 800;
-            margin-bottom: 30px;
-        }
-
-        .desc-text {
-            color: #aaa;
-            line-height: 1.8;
-            font-size: 19px;
-            margin-bottom: 20px;
-            max-width: 800px;
-        }
-
-        .about-info-list { 
-            list-style: none; padding: 0; margin: 40px 0; 
-            display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
-        }
-
-        .about-info-list li { font-size: 18px; color: #888; }
-        .about-info-list b { color: #fff; }
-
-        footer {
-            text-align: center; padding: 80px 20px 40px;
-            font-size: 13px; color: #333;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            header { padding: 20px; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="brand">𑣲 — 𝐯𝐞𝐚</div>
-        <nav class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#leadership">Founders</a>
-            <a href="#staff">Staff</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
-
-    <section class="hero-section" id="home">
-        <img src="server_baru.jpg" alt="Logo Server" class="server-logo">
-        <h1 class="hero-title">𑣲 — 𝐯𝐞𝐚</h1>
-    </section>
-
-    <section class="section-wrapper" id="leadership">
-        <h2 class="section-label">Our Leadership</h2>
-        <div class="cards-wrapper">
-            <div class="profile-card">
-                <a href="https://discordapp.com/users/1453068775283757327" target="_blank" class="card-link">
-                    <img src="valenxias.jpg.jpg" alt="Valenxias">
-                    <h2 class="display-name">valen</h2>
-                    <div class="username-tag">@valenxias</div>
-                </a>
-                <div class="role-badge" style="color: #ff9999;">Founder</div>
-                <p style="color: #666;">Owner</p>
-            </div>
-
-            <div class="profile-card">
-                <a href="https://discordapp.com/users/1033073746598166660" target="_blank" class="card-link">
-                    <img src="graigpad.jpg.jpg" alt="Graigpad">
-                    <h2 class="display-name">graig</h2>
-                    <div class="username-tag">@graigpad</div>
-                </a>
-                <div class="role-badge" style="color: #ff4d4d;">Co-Founder</div>
-                <p style="color: #666;">Co-Owner & Dev</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="staff">
-        <h2 class="section-label">Staff</h2>
-        <div class="cards-wrapper">
-            <div class="profile-card">
-                <a href="https://discord.com/users/1495299275037478983" target="_blank" class="card-link">
-                    <img src="yuna.jpeg" alt="yuna">
-                    <h2 class="display-name">yuna</h2>
-                    <div class="username-tag">@yunainianjir</div>
-                </a>
-                <div class="role-badge" style="color: #99ccff;">Moderator</div>
-            </div>
-
-            <div class="profile-card">
-                <a href="https://discord.com/users/1490003787451072683" target="_blank" class="card-link">
-                    <img src="download (14).jpg" alt="raven">
-                    <h2 class="display-name">raven</h2>
-                    <div class="username-tag">@niceguyraven</div>
-                </a>
-                <div class="role-badge" style="color: #99ccff;">Moderator</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="about-section" id="about">
-        <h2 class="about-title">About</h2>
-        <p class="desc-text">
-            In need of a place to just rest and have a light chat? Vea is here as a cozy space for those who want to share stories or simply find new friends in a warm and peaceful atmosphere.
-        </p>
-        <p class="desc-text" style="font-weight: 600; color: #fff;">
-            Just be yourself and find your comfort here. Our doors are always open for you!
-        </p>
-        <ul class="about-info-list">
-            <li><b>Created:</b> 11 April 2026</li>
-            <li><b>Focus:</b> Cozy Place & Chill Chat</li>
-            <li><b>Invite:</b> <a href="https://discord.gg/DhHJsXDVeh" target="_blank" style="color:#5865F2; text-decoration:none;">discord.gg/DhHJsXDVeh</a></li>
-        </ul>
-    </section>
-
-    <footer>
-        &copy; 2026 𑣲 — 𝐯𝐞𝐚 — All Rights Reserved.
-    </footer>
-
-</body>
-</html>
+client.login(process.env.DISCORD_TOKEN || config.token);
