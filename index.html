@@ -28,7 +28,6 @@
             backdrop-filter: blur(8px);
         }
 
-        /* Teks pojok kiri atas terupdate */
         .brand {
             font-size: 18px;
             font-weight: bold;
@@ -55,7 +54,6 @@
             padding: 20px;
         }
 
-        /* Pengaturan Logo Server Baru */
         .server-logo {
             width: 250px; 
             height: 250px;
@@ -65,7 +63,6 @@
             object-fit: cover;
         }
 
-        /* Teks utama terupdate */
         .hero-title {
             font-size: clamp(35px, 8vw, 80px);
             font-weight: 800;
@@ -73,8 +70,8 @@
             text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
         }
 
-        .founders-section {
-            padding: 100px 20px;
+        .section-wrapper {
+            padding: 80px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -103,7 +100,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 40px;
             flex: 1;
-            min-width: 300px;
+            min-width: 250px;
             border-radius: 24px;
             transition: transform 0.3s ease;
             text-align: center;
@@ -140,7 +137,7 @@
         }
 
         .about-section {
-            padding: 150px 10%;
+            padding: 100px 10%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -186,7 +183,8 @@
         <div class="brand">𑣲 — 𝐯𝐞𝐚</div>
         <nav class="nav-links">
             <a href="#home">Home</a>
-            <a href="#founders">Founders</a>
+            <a href="#leadership">Founders</a>
+            <a href="#staff">Staff</a>
             <a href="#about">About</a>
         </nav>
     </header>
@@ -196,7 +194,7 @@
         <h1 class="hero-title">𑣲 — 𝐯𝐞𝐚</h1>
     </section>
 
-    <section class="founders-section" id="founders">
+    <section class="section-wrapper" id="leadership">
         <h2 class="section-label">Our Leadership</h2>
         <div class="cards-wrapper">
             <div class="profile-card">
@@ -213,8 +211,29 @@
                     <img src="graigpad.jpg.jpg" alt="Graigpad">
                     <h2 class="display-name">graigpad</h2>
                 </a>
-                <div class="role-badge" style="color: #99ccff;">Co-Founder</div>
+                <div class="role-badge" style="color: #ff4d4d;">Co-Founder</div>
                 <p style="color: #666;">Co-Owner & Dev</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="staff">
+        <h2 class="section-label">Staff</h2>
+        <div class="cards-wrapper">
+            <div class="profile-card">
+                <a href="https://discord.com/users/1495299275037478983" target="_blank" class="card-link">
+                    <img src="yuna.jpeg" alt="yuna">
+                    <h2 class="display-name">yuna</h2>
+                </a>
+                <div class="role-badge" style="color: #99ccff;">Moderator</div>
+            </div>
+
+            <div class="profile-card">
+                <a href="https://discord.com/users/1490003787451072683" target="_blank" class="card-link">
+                    <img src="download (14).jpg" alt="raven">
+                    <h2 class="display-name">raven</h2>
+                </a>
+                <div class="role-badge" style="color: #99ccff;">Moderator</div>
             </div>
         </div>
     </section>
