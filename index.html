@@ -16,7 +16,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Perbaikan: Menambahkan margin scroll agar navigasi tidak bablas */
         section {
             scroll-margin-top: 100px; 
         }
@@ -49,145 +48,112 @@
 
         .nav-links a:hover { color: #ffffff; }
 
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .server-logo {
-            width: 250px; 
-            height: 250px;
-            border-radius: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
-            object-fit: cover;
-        }
-
-        .hero-title {
-            font-size: clamp(35px, 8vw, 80px);
-            font-weight: 800;
-            margin: 0;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-        }
-
-        .section-wrapper {
+        /* --- STYLE BARU UNTUK FEEDBACK --- */
+        .feedback-section {
             padding: 80px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .section-label {
-            font-size: clamp(40px, 8vw, 70px);
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 50px;
-            text-align: center;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .cards-wrapper {
-            display: flex;
-            gap: 30px;
-            max-width: 1000px;
-            width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .profile-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 40px;
-            flex: 1;
-            min-width: 250px;
-            border-radius: 24px;
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-
-        .profile-card:hover { transform: translateY(-10px); }
-
-        .profile-card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            object-fit: cover;
-        }
-
-        .card-link { text-decoration: none; color: inherit; }
-
-        .display-name {
-            font-size: 32px;
-            font-weight: 800;
-            margin: 0;
-        }
-
-        .username-tag {
-            font-size: 16px;
-            color: #888888;
-            margin-top: 5px;
-            font-weight: 500;
-        }
-
-        .role-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            margin: 15px 0;
-            text-transform: uppercase;
-        }
-
-        .about-section {
-            padding: 100px 10%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            scroll-margin-top: 120px; /* Tambahan khusus untuk about agar pas */
-        }
-
-        .about-title {
-            font-size: clamp(40px, 8vw, 70px);
-            font-weight: 800;
-            margin-bottom: 30px;
-        }
-
-        .desc-text {
-            color: #aaa;
-            line-height: 1.8;
-            font-size: 19px;
-            margin-bottom: 20px;
             max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        .about-info-list { 
-            list-style: none; padding: 0; margin: 40px 0; 
-            display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
+        .feedback-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 30px;
         }
 
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            direction: rtl; /* Biar hovernya asik dari kiri ke kanan */
+        }
+
+        .star-rating input { display: none; }
+
+        .star-rating label {
+            font-size: 40px;
+            color: #444;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #ffcc00;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+        }
+
+        .feedback-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            color: white;
+            font-family: inherit;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #ffffff;
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* List Review */
+        .reviews-list {
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .review-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 0;
+        }
+
+        .review-stars { color: #ffcc00; margin-bottom: 5px; }
+        .review-text { color: #aaa; font-size: 15px; }
+        /* --------------------------------- */
+
+        /* Kode lama lainnya tetap sama... */
+        .hero-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+        .server-logo { width: 250px; height: 250px; border-radius: 40px; margin-bottom: 30px; box-shadow: 0 0 50px rgba(255, 255, 255, 0.1); object-fit: cover; }
+        .hero-title { font-size: clamp(35px, 8vw, 80px); font-weight: 800; margin: 0; text-shadow: 0 0 25px rgba(255, 255, 255, 0.4); }
+        .section-wrapper { padding: 80px 20px; display: flex; flex-direction: column; align-items: center; }
+        .section-label { font-size: clamp(40px, 8vw, 70px); font-weight: 800; color: #ffffff; margin-bottom: 50px; text-align: center; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+        .cards-wrapper { display: flex; gap: 30px; max-width: 1000px; width: 100%; justify-content: center; flex-wrap: wrap; }
+        .profile-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); padding: 40px; flex: 1; min-width: 250px; border-radius: 24px; transition: transform 0.3s ease; text-align: center; }
+        .profile-card:hover { transform: translateY(-10px); }
+        .profile-card img { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.1); object-fit: cover; }
+        .card-link { text-decoration: none; color: inherit; }
+        .display-name { font-size: 32px; font-weight: 800; margin: 0; }
+        .username-tag { font-size: 16px; color: #888888; margin-top: 5px; font-weight: 500; }
+        .role-badge { display: inline-block; padding: 6px 14px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; font-size: 12px; font-weight: bold; margin: 15px 0; text-transform: uppercase; }
+        .about-section { padding: 100px 10%; display: flex; flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 120px; }
+        .about-title { font-size: clamp(40px, 8vw, 70px); font-weight: 800; margin-bottom: 30px; }
+        .desc-text { color: #aaa; line-height: 1.8; font-size: 19px; margin-bottom: 20px; max-width: 800px; }
+        .about-info-list { list-style: none; padding: 0; margin: 40px 0; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
         .about-info-list li { font-size: 18px; color: #888; }
         .about-info-list b { color: #fff; }
-
-        footer {
-            text-align: center; padding: 80px 20px 40px;
-            font-size: 13px; color: #333;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            header { padding: 20px; }
-        }
+        footer { text-align: center; padding: 80px 20px 40px; font-size: 13px; color: #333; }
+        @media (max-width: 768px) { .nav-links { display: none; } header { padding: 20px; } }
     </style>
 </head>
 <body>
@@ -199,6 +165,7 @@
             <a href="#leadership">Founders</a>
             <a href="#staff">Staff</a>
             <a href="#about">About</a>
+            <a href="#feedback">Feedback</a>
         </nav>
     </header>
 
@@ -219,7 +186,6 @@
                 <div class="role-badge" style="color: #ff9999;">Founder</div>
                 <p style="color: #666;">Owner</p>
             </div>
-
             <div class="profile-card">
                 <a href="https://discordapp.com/users/1033073746598166660" target="_blank" class="card-link">
                     <img src="graigpad.jpg.jpg" alt="Graigpad">
@@ -243,7 +209,6 @@
                 </a>
                 <div class="role-badge" style="color: #99ccff;">Moderator</div>
             </div>
-
             <div class="profile-card">
                 <a href="https://discord.com/users/1490003787451072683" target="_blank" class="card-link">
                     <img src="download (14).jpg" alt="raven">
@@ -257,17 +222,41 @@
 
     <section class="about-section" id="about">
         <h2 class="about-title">About</h2>
-        <p class="desc-text">
-            In need of a place to just rest and have a light chat? Vea is here as a cozy space for those who want to share stories or simply find new friends in a warm and peaceful atmosphere.
-        </p>
-        <p class="desc-text" style="font-weight: 600; color: #fff;">
-            Just be yourself and find your comfort here. Our doors are always open for you!
-        </p>
+        <p class="desc-text">In need of a place to just rest and have a light chat? Vea is here as a cozy space for those who want to share stories or simply find new friends in a warm and peaceful atmosphere.</p>
+        <p class="desc-text" style="font-weight: 600; color: #fff;">Just be yourself and find your comfort here. Our doors are always open for you!</p>
         <ul class="about-info-list">
             <li><b>Created:</b> 11 April 2026</li>
             <li><b>Focus:</b> Cozy Place & Chill Chat</li>
             <li><b>Invite:</b> <a href="https://discord.gg/DhHJsXDVeh" target="_blank" style="color:#5865F2; text-decoration:none;">discord.gg/DhHJsXDVeh</a></li>
         </ul>
+    </section>
+
+    <section class="feedback-section" id="feedback">
+        <h2 class="section-label" style="font-size: 40px; margin-bottom: 20px;">Feedback & Reviews</h2>
+        <p style="color: #aaa;">Bantu kami menjadi lebih baik dengan memberikan rating dan saran.</p>
+
+        <div class="feedback-container">
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+            </div>
+            <textarea class="feedback-input" rows="4" placeholder="Tuliskan komentar atau saranmu di sini..."></textarea>
+            <button class="submit-btn" onclick="alert('Terima kasih atas feedback-nya!')">Kirim Feedback</button>
+        </div>
+
+        <div class="reviews-list">
+            <div class="review-item">
+                <div class="review-stars">★★★★★</div>
+                <div class="review-text">"Servernya keren banget, suasananya beneran cozy sesuai deskripsi!"</div>
+            </div>
+            <div class="review-item">
+                <div class="review-stars">★★★★☆</div>
+                <div class="review-text">"Webnya simpel tapi estetik, suka banget sama tampilannya."</div>
+            </div>
+        </div>
     </section>
 
     <footer>
