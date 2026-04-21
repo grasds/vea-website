@@ -48,7 +48,6 @@
 
         .nav-links a:hover { color: #ffffff; }
 
-        /* --- STYLE BARU UNTUK FEEDBACK --- */
         .feedback-section {
             padding: 80px 20px;
             max-width: 800px;
@@ -69,7 +68,7 @@
             justify-content: center;
             gap: 10px;
             margin-bottom: 20px;
-            direction: rtl; /* Biar hovernya asik dari kiri ke kanan */
+            direction: rtl; 
         }
 
         .star-rating input { display: none; }
@@ -117,22 +116,6 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
-        /* List Review */
-        .reviews-list {
-            margin-top: 50px;
-            text-align: left;
-        }
-
-        .review-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px 0;
-        }
-
-        .review-stars { color: #ffcc00; margin-bottom: 5px; }
-        .review-text { color: #aaa; font-size: 15px; }
-        /* --------------------------------- */
-
-        /* Kode lama lainnya tetap sama... */
         .hero-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
         .server-logo { width: 250px; height: 250px; border-radius: 40px; margin-bottom: 30px; box-shadow: 0 0 50px rgba(255, 255, 255, 0.1); object-fit: cover; }
         .hero-title { font-size: clamp(35px, 8vw, 80px); font-weight: 800; margin: 0; text-shadow: 0 0 25px rgba(255, 255, 255, 0.4); }
@@ -236,26 +219,24 @@
         <p style="color: #aaa;">Bantu kami menjadi lebih baik dengan memberikan rating dan saran.</p>
 
         <div class="feedback-container">
-            <div class="star-rating">
-                <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-                <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-                <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-                <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-                <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
-            </div>
-            <textarea class="feedback-input" rows="4" placeholder="Tuliskan komentar atau saranmu di sini..."></textarea>
-            <button class="submit-btn" onclick="alert('Terima kasih atas feedback-nya!')">Kirim Feedback</button>
-        </div>
+            <form action="https://formsubmit.co/graigpadmadiwangsakusmunandarg@gmail.com" method="POST">
+                
+                <input type="hidden" name="_captcha" value="false">
+                
+                <input type="hidden" name="_next" value="https://vea-website-kappa.vercel.app/">
 
-        <div class="reviews-list">
-            <div class="review-item">
-                <div class="review-stars">★★★★★</div>
-                <div class="review-text">"Servernya keren banget, suasananya beneran cozy sesuai deskripsi!"</div>
-            </div>
-            <div class="review-item">
-                <div class="review-stars">★★★★☆</div>
-                <div class="review-text">"Webnya simpel tapi estetik, suka banget sama tampilannya."</div>
-            </div>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="Rating" value="5 Bintang" required><label for="star5">★</label>
+                    <input type="radio" id="star4" name="Rating" value="4 Bintang"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="Rating" value="3 Bintang"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="Rating" value="2 Bintang"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="Rating" value="1 Bintang"><label for="star1">★</label>
+                </div>
+                
+                <textarea name="Komentar" class="feedback-input" rows="4" placeholder="Tuliskan komentar atau saranmu di sini..." required></textarea>
+                
+                <button type="submit" class="submit-btn">Kirim Feedback</button>
+            </form>
         </div>
     </section>
 
